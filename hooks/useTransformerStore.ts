@@ -72,7 +72,7 @@ export const useTransformerStore = create<TransformerStore>((set, get) => ({
     return {
       BDV: s.BDV,
       Tan_Delta: s.Tan_Delta,
-      Insulation_Resistance: s.Insulation_Resistance,
+      Insulation_Resistance: s.Insulation_Resistance*1000000, // Convert MΩ to Ω for API
       Capacitance_Variation: s.Capacitance_Variation,
       Polarization_Index: s.Polarization_Index,
       DDF: s.DDF,

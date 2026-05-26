@@ -31,21 +31,21 @@ export interface SliderConfig {
 
 export const SLIDER_CONFIGS: SliderConfig[] = [
   { key: 'BDV', label: 'Breakdown Voltage', min: 0, max: 100, default: 50, unit: 'kV', step: 1 },
-  { key: 'Tan_Delta', label: 'Tan Delta', min: 0, max: 1, default: 0.3, unit: '—', step: 0.01 },
+  { key: 'Tan_Delta', label: 'Tan Delta', min: 0, max: 5.0, default: 0.3, unit: '—', step: 0.01 },
   {
     key: 'Insulation_Resistance',
     label: 'Insulation Resistance',
-    min: 0,
-    max: 1000,
+    min: 1,
+    max: 5000,
     default: 500,
     unit: 'MΩ',
-    step: 1,
+    step: 10,
   },
   {
     key: 'Capacitance_Variation',
     label: 'Capacitance Variation',
     min: -10,
-    max: 10,
+    max: 15,
     default: 0,
     unit: '%',
     step: 0.1,
@@ -53,13 +53,13 @@ export const SLIDER_CONFIGS: SliderConfig[] = [
   {
     key: 'Polarization_Index',
     label: 'Polarization Index',
-    min: 0,
-    max: 10,
-    default: 5,
+    min: 0.5,
+    max: 5,
+    default: 3.0,
     unit: '—',
-    step: 0.1,
+    step: 0.05,
   },
-  { key: 'DDF', label: 'Dielectric Dissipation Factor', min: 0, max: 1, default: 0.2, unit: '—', step: 0.01 },
+  { key: 'DDF', label: 'Dielectric Dissipation Factor', min: 0.1, max: 5, default: 0.3, unit: '—', step: 0.01 },
 ];
 
 export const STATUS_COLORS: Record<HealthStatus, string> = {
