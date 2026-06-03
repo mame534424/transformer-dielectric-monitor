@@ -7,12 +7,10 @@ It lets you:
 - Run AI health prediction
 - Open AI chat for explanation/help
 
-If you are not technical, follow these steps exactly.
+follow these steps exactly.
 
 ## What you need first
 
-- A Windows computer
-- Internet connection (first setup)
 - Node.js installed (recommended: version 18 or newer)
 - Backend running from the backend folder
 
