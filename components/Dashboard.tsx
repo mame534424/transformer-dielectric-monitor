@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTransformerStore } from '@/hooks/useTransformerStore';
 import ThemeToggle from './ThemeToggle';
@@ -32,7 +33,7 @@ export default function Dashboard() {
           <h1 className="font-[family-name:var(--font-syne)] text-3xl font-extrabold uppercase tracking-tight text-[var(--text-main)] md:text-5xl">
             Transformer Dielectric Health Monitor
           </h1>
-          <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-white/50">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-4 text-sm text-white/50">
             <span className="flex items-center gap-2">
               <span
                 className={`status-dot h-2 w-2 rounded-full ${isDisconnected ? 'bg-amber-400' : 'bg-[var(--accent-green)]'}`}
@@ -42,7 +43,15 @@ export default function Dashboard() {
             <span className="font-[family-name:var(--font-space-mono)] text-xs text-[var(--accent-cyan)]">
               TDHM v1.0
             </span>
+            <Link
+              href="/chat"
+              className="rounded-lg border border-[var(--accent-cyan)]/30 px-3 py-1 text-xl font-semibold uppercase tracking-wider text-[var(--accent-cyan)] transition hover:border-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/10"
+            >
+              AI Chat →
+          </Link>
+            
           </div>
+          
         </motion.header>
 
         <div className="flex flex-col gap-6 lg:flex-row">

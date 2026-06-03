@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import { predict, getApiErrorMessage } from '@/lib/api';
-import type { HealthStatus, PredictRequest } from '@/types';
+import type { HealthStatus, PredictRequest, DiagnosticResultContext } from '@/types';
 import { SLIDER_CONFIGS } from '@/types';
 
 const defaults: PredictRequest = {
@@ -17,6 +17,7 @@ const defaults: PredictRequest = {
 interface TransformerStore extends PredictRequest {
   status: HealthStatus | null;
   prediction: number | null;
+  lastResult: DiagnosticResultContext | null;
   isLoading: boolean;
   isDarkMode: boolean;
   apiError: string | null;
@@ -39,6 +40,7 @@ export const useTransformerStore = create<TransformerStore>((set, get) => ({
   ...defaults,
   status: null,
   prediction: null,
+  lastResult: null,
   isLoading: false,
   isDarkMode: true,
   apiError: null,
@@ -85,9 +87,15 @@ export const useTransformerStore = create<TransformerStore>((set, get) => ({
     set({ isLoading: true, apiError: null });
     try {
       const result = await predict(get().getPayload());
+      const inputs = result.inputs ?? get().getPayload();
       set({
         prediction: result.prediction,
         status: result.status,
+        lastResult: {
+          status: result.status,
+          inputs,
+          prediction: result.prediction,
+        },
         isDisconnected: false,
         isLoading: false,
       });
@@ -98,6 +106,7 @@ export const useTransformerStore = create<TransformerStore>((set, get) => ({
         isDisconnected: true,
         status: null,
         prediction: null,
+        lastResult: null,
       });
     }
   },

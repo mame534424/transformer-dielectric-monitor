@@ -1,12 +1,17 @@
 import axios from 'axios';
-import type { PredictRequest, PredictResponse } from '@/types';
+import type { ChatRequest, ChatResponse, PredictRequest, PredictResponse } from '@/types';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export async function predict(data: PredictRequest): Promise<PredictResponse> {
   const response = await axios.post<PredictResponse>(`${BASE_URL}/predict`, data);
   console.log('API request payload:', data);
   console.log('API response:', response);
+  return response.data;
+}
+
+export async function chat(data: ChatRequest): Promise<ChatResponse> {
+  const response = await axios.post<ChatResponse>(`${BASE_URL}/chat`, data);
   return response.data;
 }
 

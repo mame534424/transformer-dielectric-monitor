@@ -1,7 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTransformerStore } from '@/hooks/useTransformerStore';
+import { useChatStore } from '@/hooks/useChatStore';
 import StatusCard from './StatusCard';
 import RiskMeter from './RiskMeter';
 import ConfidenceRing from './ConfidenceRing';
@@ -9,8 +11,10 @@ import ConfidenceRing from './ConfidenceRing';
 export default function DiagnosticsPanel() {
   const status = useTransformerStore((s) => s.status);
   const prediction = useTransformerStore((s) => s.prediction);
+  const lastResult = useTransformerStore((s) => s.lastResult);
   const isLoading = useTransformerStore((s) => s.isLoading);
   const isDisconnected = useTransformerStore((s) => s.isDisconnected);
+  const openWithResult = useChatStore((s) => s.openWithResult);
 
   return (
     <div className="flex h-full flex-col gap-4">
@@ -56,6 +60,17 @@ export default function DiagnosticsPanel() {
           </div>
           <RiskMeter prediction={prediction} />
           <ConfidenceRing prediction={prediction} />
+          {lastResult && (
+            <div className="md:col-span-2">
+              <Link
+                href="/chat?mode=result"
+                onClick={() => openWithResult(lastResult)}
+                className="block w-full rounded-xl border border-[var(--accent-green)] bg-gradient-to-r from-[var(--accent-green)]/15 to-[var(--accent-cyan)]/15 py-3 text-center font-[family-name:var(--font-syne)] text-sm font-bold uppercase tracking-[0.15em] text-[var(--accent-green)] panel-glow transition hover:scale-[1.01]"
+              >
+                Ask AI About This Result
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </div>

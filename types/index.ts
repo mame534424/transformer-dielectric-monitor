@@ -17,6 +17,32 @@ export interface PredictRequest {
 export interface PredictResponse {
   prediction: number;
   status: HealthStatus;
+  inputs?: PredictRequest;
+}
+
+export interface ChatRequest {
+  question: string;
+  status?: HealthStatus;
+  inputs?: PredictRequest;
+}
+
+export interface ChatResponse {
+  answer: string;
+}
+
+export interface ChatMessageItem {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: number;
+}
+
+export type ChatMode = 'general' | 'result';
+
+export interface DiagnosticResultContext {
+  status: HealthStatus;
+  inputs: PredictRequest;
+  prediction: number;
 }
 
 export interface SliderConfig {
